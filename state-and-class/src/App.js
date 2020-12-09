@@ -8,22 +8,36 @@ class App extends Component {
     super()
 
     this.state = {
-      count: 0
+      count: 0,
+      inputtedNumber: 0
     }
-    this.increment =this.increment.bind(this)
+    // this.increment =this.increment.bind(this)
   }
 
-increment () {
-    const currentCount = this.state.count
-    const newCount = currentCount + 1
+increment =()=> {
+   
+   const newCount = this.state.count + this.state.inputtedNumber;
+   this.setState({count: newCount})
+  }
+  decrease =()=> {
+    
+    const newCount = this.state.count -  this.state.inputtedNumber;
     this.setState({ count: newCount})
+  }
+
+  changeInput= (evt) => {
+        let newValue = parseInt(evt.target.value || 0)
+       
+        this.setState({inputtedNumber: newValue})
   }
     render(){
       return (
         <div>
           窓の外雨は
           <h1>{this.state.count}</h1>
+          <input  value={this.state.inputtedNumber}  onChange={this.changeInput}/>
           <button onClick={this.increment}>+</button>
+          <button onClick={this.decrease}>-</button>
         </div>
       )
     }
